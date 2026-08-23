@@ -6,14 +6,18 @@
 		<style>
 			#listContent
 			{
-				width: 400px;
+				width: 1000px;
 				height: auto;
 				margin: 0 auto 0 auto;
+				font-size: 12px;
+				font-family: verdana;
 			}
 
 			#listHeader
 			{
 				width: 100%
+				font-weight:  bold;
+				color: rgb(100, 100, 100);
 			}
 
 			#listRows
@@ -24,8 +28,8 @@
 			.listViewColumns
 			{
 				display: grid;
-				grid-template-columns: 1fr 1fr 1fr;
-				gap: 0px;
+				grid-template-columns: 1fr 10fr 8fr 8fr 8fr 5fr 5fr 5fr 1fr;
+				gap: 5px;
 			}
 
 			.figure
@@ -39,14 +43,21 @@
 		<script>
 			const lv = 
 			{
-				getRecords: function(year = 2025, month = 3) {
+				pageSize: 50,
+				pageNo: 1,
+				sort: [],
+				search: [],
+				records: [],
+				getRecords: function(year = 2025, month = 3) 
+				{
 					$.ajax(
 						{
 							url: `https://oracleapex.com/ords/teochewthunder/borrowing/${year}/${month}`,
 							method: "GET",
 							success: function(data) 
 							{
-								console.log(data);
+								lv.records = data.items;
+								lv.filterRecords();
 							},
 							error: function (xhr, status, error)
 							{
@@ -54,24 +65,94 @@
 							}
 						}
 					)					
+				},
+				filterRecords: function() 
+				{
+					this.records.forEach(
+						(x, i) => 
+						{
+							console.log(x, i);
+						    const row = $("<div></div>");
+						    row.addClass("listViewColumns");
+
+						    let col;
+						    col = $("<div></div>");
+						    col.text(i + 1);
+						    col.addClass("figure");
+						    row.append(col);
+						    col = $("<div></div>");
+						    col.text(x.title);
+						    row.append(col);
+						    col = $("<div></div>");
+						    col.text(x.author);
+						    row.append(col);
+						    col = $("<div></div>");
+						    col.text(x.category);
+						    row.append(col);
+						    col = $("<div></div>");
+						    col.text(x.name);
+						    row.append(col);
+						    col = $("<div></div>");
+						    col.text(this.prettifyDate(x.borrowdate));
+						    col.addClass("figure");
+						    row.append(col);
+						    col = $("<div></div>");
+						    col.text(this.prettifyDate(x.returnby));
+						    col.addClass("figure");
+						    row.append(col);
+						    col = $("<div></div>");
+						    col.text(this.prettifyDate(x.returndate));
+						    col.addClass("figure");
+						    row.append(col);
+						    col = $("<div></div>");
+						    col.text(x.fine);
+						    col.addClass("figure");
+						    row.append(col);
+						    $("#listRows").append(row);						    
+						}
+					)
+				},
+				prettifyDate: function(dt)
+				{
+					var arr = dt.split("T");
+					return arr[0];
 				}
 			};
+
+			$(document).ready(
+				function() 
+				{
+					lv.getRecords();
+				}
+			);
 		</script>
 	</head>
 
 	<body>
+		<div id="listFilters">
+			
+		</div>
+
 		<div id="listContent">
 			<div id="listHeader" class="listViewColumns">
-				
+				<div>No</div>
+				<div>Title</div>
+				<div>Author</div>
+				<div>Category</div>
+				<div>Borrower</div>
+				<div>Borrowed</div>
+				<div>Return By</div>
+				<div>Returned</div>
+				<div>Fine</div>
 			</div>
 
 			<div id="listRows">
 				
 			</div>
+		</div>
 
-			<div id="listFooter">
-				
-			</div>
+		<div id="listPaging">
+			
 		</div>
 	</body>
 </html>
