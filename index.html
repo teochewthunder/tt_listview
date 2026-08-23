@@ -19,8 +19,28 @@
 			}
 		</style>
 
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 		<script>
-			
+			const lv = 
+			{
+				getRecords: function(year = 2025, month = 3) {
+					$.ajax(
+						{
+							url: `https://oracleapex.com/ords/teochewthunder/borrowing/${year}/${month}`,
+							method: "GET",
+							success: function(data) 
+							{
+								console.log(data);
+							},
+							error: function (xhr, status, error)
+							{
+								console.log(xhr);
+							}
+						}
+					)					
+				}
+			};
 		</script>
 	</head>
 
