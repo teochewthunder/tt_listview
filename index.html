@@ -4,13 +4,28 @@
 		<title>List View</title>
 
 		<style>
-			.listHeader
+			#listContent
+			{
+				width: 400px;
+				height: auto;
+				margin: 0 auto 0 auto;
+			}
+
+			#listHeader
+			{
+				width: 100%
+			}
+
+			#listRows
+			{
+				width: 100%
+			}
+
+			.listViewColumns
 			{
 				display: grid;
 				grid-template-columns: 1fr 1fr 1fr;
 				gap: 0px;
-				width: 400px;
-				margin: 0 auto 0 auto;
 			}
 
 			.figure
@@ -45,16 +60,16 @@
 	</head>
 
 	<body>
-		<div class="listContent">
-			<div class="listHeader">
+		<div id="listContent">
+			<div id="listHeader" class="listViewColumns">
 				
 			</div>
 
-			<div class="listRows">
+			<div id="listRows">
 				
 			</div>
 
-			<div class="listFooter">
+			<div id="listFooter">
 				
 			</div>
 		</div>
