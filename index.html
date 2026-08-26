@@ -45,7 +45,7 @@
 			{
 				pageSize: 50,
 				pageNo: 1,
-				sort: [],
+				sort: [ {"col": "title", "dir": "asc"}, {"col": "borrowdate", "dir": "desc"} ],
 				search: "",
 				records: [],
 				getRecords: function(year = 2025, month = 3) 
@@ -72,7 +72,19 @@
 
 					if (this.search.length > 0)
 					{
-						//search text
+						filtered = filtered.filter
+						(
+							(x) =>
+							{
+								return 
+								(
+									x.title.indexOf(this.search) > -1 ||
+									x.category.indexOf(this.search) > -1 ||
+									x.author.indexOf(this.search) > -1 ||
+									x.name.indexOf(this.search) > -1
+								);
+							}
+						)
 					}
 
 					if (this.sort.length > 0)
@@ -88,14 +100,14 @@
 
 								if (["borrowdate", "returndate", "returnby"].indexOf(x.col) > -1) 
 								{
-									if (x.dir == "asc") filtered.sort((a, b) => new Date(a[x.col]) - new Date(b[x.col]);
-									if (x.dir == "desc") iltered.sort((a, b) => new Date(b[x.col]) - new Date(a[x.col]);				
+									if (x.dir == "asc") filtered.sort((a, b) => new Date(a[x.col]) - new Date(b[x.col]));
+									if (x.dir == "desc") filtered.sort((a, b) => new Date(b[x.col]) - new Date(a[x.col]));				
 								}
 
 								if (["fine"].indexOf(x.col) > -1) 
 								{
-									if (x.dir == "asc") filtered.sort((a, b) => a[x.col] - b[x.col];
-									if (x.dir == "desc") iltered.sort((a, b) => b[x.col] - a[x.col];				
+									if (x.dir == "asc") filtered.sort((a, b) => a[x.col] - b[x.col]);
+									if (x.dir == "desc") filtered.sort((a, b) => b[x.col] - a[x.col]);				
 								}
 							}
 						);
@@ -104,9 +116,9 @@
 					//getsubset
 					var startIndex = (this.pageNo - 1) * this.pageSize;
 
-					filtered = filtered.slice(startIndex, pageSize);
+					filtered = filtered.slice(startIndex, this.pageSize);
 
-					this.filtered.forEach(
+					filtered.forEach(
 						(x, i) => 
 						{
 						    const row = $("<div></div>");
