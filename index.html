@@ -4,6 +4,7 @@
 		<title>List View</title>
 
 		<style>
+			div {outline: 0px solid red;}
 			#listContent
 			{
 				width: 1000px;
@@ -32,9 +33,25 @@
 				gap: 5px;
 			}
 
+			#listPaging
+			{
+				width: 100%;
+			}
+
+			#listPaging div
+			{
+				float: right;
+			}
+
 			.figure
 			{
 				text-align: right;
+			}
+
+			.pageButton
+			{
+				width: 30px;
+				height: 30px;
 			}
 		</style>
 
@@ -66,8 +83,38 @@
 						}
 					)					
 				},
-				filterRecords: function() 
+				setPageNo: function(pageNo)
 				{
+					let finalPageNo = pageNo;
+					let pages = Math.Floor(this.records / this.pageSize);
+					if (finalPageNo < 1) finalPageNo = 1;
+					if (finalPageNo > pages) finalPageNo = pages;
+
+					this.pageNo = finalPageNo;
+					this.filterRecords();
+				},
+				setPageSize: function(pageSize)
+				{
+					this.pageSize = pageSize;
+					this.pageNo = 1;
+					this.filterRecords();
+				},
+				setSearch: function(search)
+				{
+
+				},
+				addSort: function(col, dir)
+				{
+
+				},
+				removeSort: function(col)
+				{
+
+				},				
+				filterRecords: function() 
+				{console.log(this.pageNo,this.pageSize,this.search,this.sort);
+					$("#listRows").html("");
+
 					var filtered = structuredClone(this.records);
 
 					if (this.search.length > 0)
@@ -178,11 +225,11 @@
 	</head>
 
 	<body>
-		<div id="listFilters">
-			
-		</div>
-
 		<div id="listContent">
+			<div id="listFilters">
+				
+			</div>	
+					
 			<div id="listHeader" class="listViewColumns">
 				<div>No</div>
 				<div>Title</div>
@@ -198,21 +245,30 @@
 			<div id="listRows">
 				
 			</div>
-		</div>
 
-		<div id="listPaging">
-			Records per Page
-			<select>
-				<option value="20">20</option>
-				<option value="20">50</option>
-				<option value="20">100</option>
-				<option value="20">500</option>
-			</select>
-			<button></button>
-			<button></button>
-			<span></span>
-			<button></button>
-			<button></button>
+			<div id="listPaging">
+				<div>
+					Records per Page
+					<select onchange="lv.setPageSize(this.value)">
+						<option value="20" >20</option>
+						<option value="50" selected>50</option>
+						<option value="100">100</option>
+						<option value="500">500</option>
+					</select>				
+				</div>
+
+				<div>
+					<button class="pageButton" onchange="lv.setPageNo(1)">&#9198;</button>
+					<button class="pageButton" onchange="lv.setPageNo(lv.pageNo - 1)">&#9664;</button>	
+				
+					<span id="pnlPageNo"></span>
+					<span>/</span>
+					<span id="pnlPages"></span>
+
+					<button class="pageButton" onchange="lv.setPageNo(lv.pageNo + 1)">&#9654;</button>
+					<button class="pageButton" onchange="lv.setPageNo(Math.Floor(lv.records / lv.pageSize))">&#9197;</button>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
