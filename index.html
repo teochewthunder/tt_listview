@@ -50,10 +50,17 @@
 
 			.pageButton
 			{
-				width: 25px;
-				height: 25px;
-				font-size: 0.8em;
-				margin-left: 5px;
+				width: 20px;
+				height: 20px;
+				font-size: 1.2em;
+				background: transparent;
+				border: none;
+				color: rgb(0, 0, 0);
+			}
+
+			.pageButton:hover
+			{
+				color: rgb(255, 0, 0);
 			}
 		</style>
 
@@ -104,9 +111,10 @@
 					let pages = this.getPages();
 					if (finalPageNo < 1) finalPageNo = 1;
 					if (finalPageNo > pages) finalPageNo = pages;
-console.log(pageNo);
+
 					this.pageNo = finalPageNo;
 					this.filterRecords();
+					this.renderPageInfo();
 
 					return;
 				},
@@ -116,10 +124,16 @@ console.log(pageNo);
 					this.pageNo = 1;
 					this.filterRecords();
 					this.renderPageInfo();
-				},
-				setSearch: function(search)
-				{
 
+					return;
+				},
+				setSearch: function(searchTerm)
+				{
+					this.search = (searchTerm.length > 2 ? searchTerm : "");
+					this.filterRecords();
+					this.renderPageInfo();
+
+					return;
 				},
 				addSort: function(col, dir)
 				{
@@ -130,26 +144,25 @@ console.log(pageNo);
 
 				},				
 				filterRecords: function() 
-				{console.log(this.records.length);
+				{
 					$("#listRows").html("");
 
 					var filtered = structuredClone(this.records);
 
-					if (this.search.length > 0)
+					if (this.search.length > 2)
 					{
 						filtered = filtered.filter
 						(
 							(x) =>
 							{
-								return 
-								(
+								return (
 									x.title.indexOf(this.search) > -1 ||
 									x.category.indexOf(this.search) > -1 ||
 									x.author.indexOf(this.search) > -1 ||
 									x.name.indexOf(this.search) > -1
 								);
 							}
-						)
+						);
 					}
 
 					if (this.sort.length > 0)
@@ -182,7 +195,7 @@ console.log(pageNo);
 					var startIndex = ((this.pageNo - 1) * this.pageSize);
 
 					filtered = filtered.slice(startIndex, startIndex + parseInt(this.pageSize));
-console.log('test', filtered.length, startIndex, startIndex + parseInt(this.pageSize));
+
 					filtered.forEach(
 						(x, i) => 
 						{
@@ -235,6 +248,8 @@ console.log('test', filtered.length, startIndex, startIndex + parseInt(this.page
 				{
 					$("#pnlPageNo").text(this.pageNo);
 					$("#pnlPages").text(this.getPages());
+
+					return;
 				}
 			};
 
@@ -250,7 +265,7 @@ console.log('test', filtered.length, startIndex, startIndex + parseInt(this.page
 	<body>
 		<div id="listContent">
 			<div id="listFilters">
-				
+				<input type="text" placeholder="Search term, e.g, orange" value="" oninput="lv.setSearch(this.value);">
 			</div>	
 					
 			<div id="listHeader" class="listViewColumns">
