@@ -65,7 +65,7 @@
 				font-size: 0.8em;
 				background: transparent;
 				border: none;
-				color: rgb(0, 0, 0);				
+				color: rgb(0, 0, 0);
 			}
 
 			.pageButton:hover, .sortButton:hover
@@ -141,7 +141,7 @@
 				},
 				setSearch: function(searchTerm)
 				{
-					this.search = (searchTerm.length > 2 ? searchTerm : "");
+					this.search = (searchTerm.length > 2 ? searchTerm.toLowerCase() : "");
 					this.filterRecords();
 					this.renderPageInfo();
 
@@ -164,10 +164,10 @@
 							(x) =>
 							{
 								return (
-									x.title.indexOf(this.search) > -1 ||
-									x.category.indexOf(this.search) > -1 ||
-									x.author.indexOf(this.search) > -1 ||
-									x.name.indexOf(this.search) > -1
+									x.title.toLowerCase().indexOf(this.search) > -1 ||
+									x.category.toLowerCase().indexOf(this.search) > -1 ||
+									x.author.toLowerCase().indexOf(this.search) > -1 ||
+									x.name.toLowerCase().indexOf(this.search) > -1
 								);
 							}
 						);
