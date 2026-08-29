@@ -58,7 +58,17 @@
 				color: rgb(0, 0, 0);
 			}
 
-			.pageButton:hover
+			.sortbutton
+			{
+				width: 10px;
+				height: 10px;
+				font-size: 0.8em;
+				background: transparent;
+				border: none;
+				color: rgb(0, 0, 0);				
+			}
+
+			.pageButton:hover, .sortButton:hover
 			{
 				color: rgb(255, 0, 0);
 			}
@@ -85,13 +95,15 @@
 								lv.records = data.items;
 								lv.filterRecords();
 								lv.renderPageInfo();
+
+								return;
 							},
 							error: function (xhr, status, error)
 							{
 								console.log(xhr);
 							}
 						}
-					)					
+					);				
 				},
 				getPages: function()
 				{
@@ -135,13 +147,9 @@
 
 					return;
 				},
-				addSort: function(col, dir)
+				toggleort: function(col)
 				{
-
-				},
-				removeSort: function(col)
-				{
-
+					return;
 				},				
 				filterRecords: function() 
 				{
@@ -237,7 +245,9 @@
 						    row.append(col);
 						    $("#listRows").append(row);						    
 						}
-					)
+					);
+
+					return;
 				},
 				prettifyDate: function(dt)
 				{
@@ -270,14 +280,14 @@
 					
 			<div id="listHeader" class="listViewColumns">
 				<div>No</div>
-				<div>Title</div>
-				<div>Author</div>
-				<div>Category</div>
-				<div>Borrower</div>
-				<div>Borrowed</div>
-				<div>Return By</div>
-				<div>Returned</div>
-				<div>Fine</div>
+				<div>Title <button class="sortbutton" onclick="lv.toggleSort('title')"></button></div>
+				<div>Author <button class="sortbutton" onclick="lv.toggleSort('author')"></button></div>
+				<div>Category <button class="sortbutton" onclick="lv.toggleSort('category')"></button></div>
+				<div>Borrower <button class="sortbutton" onclick="lv.toggleSort('borrower')"></button></div>
+				<div>Borrowed <button class="sortbutton" onclick="lv.toggleSort('borrowdate')"></button></div>
+				<div>Return By <button class="sortbutton" onclick="lv.toggleSort('returnby')"></button></div>
+				<div>Returned <button class="sortbutton" onclick="lv.toggleSort('returndate')"></button></div>
+				<div>Fine <button class="sortbutton" onclick="lv.toggleSort('fine')"></button></div>
 			</div>
 
 			<div id="listRows">
