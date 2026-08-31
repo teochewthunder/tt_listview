@@ -77,18 +77,19 @@
 			{
 				width: 10px;
 				height: 10px;
+				margin-left: 10px;
 				display: inline-block;
-				content: "&dash;";
+				content: "-";
 			}
 
 			.asc:after
 			{
-				content: "&9650;";
+				content: "\25B2";
 			}
 
 			.desc:after
 			{
-				content: "&9660;";
+				content: "\25BC";
 			}
 		</style>
 
@@ -184,22 +185,23 @@
 
 					if (currentIndex > -1)
 					{
-						if (this.sort[i].dir == "asc")
+						if (this.sort[currentIndex].dir == "asc")
 						{
-							this.sort[i].dir = "desc";
+							this.sort[currentIndex].dir = "desc";
 							$("#" + id).addClass("desc");
 						}
 						else
 						{
-							this.sort.splice(i, 1);
+							this.sort.splice(currentIndex, 1);
 						}
 					} 
 					else 
 					{
-						this.push({ "col": col, "dir": "asc"});
+						this.sort.push({ "col": col, "dir": "asc"});
 						$("#" + id).addClass("asc");
 					}
 					
+					this.filterRecords();
 					return;
 				},				
 				filterRecords: function() 
