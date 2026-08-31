@@ -58,11 +58,11 @@
 				color: rgb(0, 0, 0);
 			}
 
-			.sortbutton
+			.sortbutton, .nobutton
 			{
-				width: 10px;
-				height: 10px;
-				font-size: 0.8em;
+				width: auto;
+				height: 1.5em;
+				font-size: 1em;
 				background: transparent;
 				border: none;
 				color: rgb(0, 0, 0);
@@ -71,6 +71,24 @@
 			.pageButton:hover, .sortButton:hover
 			{
 				color: rgb(255, 0, 0);
+			}
+
+			.sortbutton:after
+			{
+				width: 10px;
+				height: 10px;
+				display: inline-block;
+				content: "&dash;";
+			}
+
+			.asc:after
+			{
+				content: "&9650;";
+			}
+
+			.desc:after
+			{
+				content: "&9660;";
 			}
 		</style>
 
@@ -147,8 +165,41 @@
 
 					return;
 				},
-				toggleort: function(col)
+				toggleSort: function(col, id)
 				{
+					var currentIndex = -1;
+					$("#" + id)
+					.removeClass("asc")
+					.removeClass("desc");
+
+					this.sort.forEach(
+						(x, i) => 
+						{
+							if (x.col == col)
+							{
+								currentIndex = i;
+							}
+						}
+					);
+
+					if (currentIndex > -1)
+					{
+						if (this.sort[i].dir == "asc")
+						{
+							this.sort[i].dir = "desc";
+							$("#" + id).addClass("desc");
+						}
+						else
+						{
+							this.sort.splice(i, 1);
+						}
+					} 
+					else 
+					{
+						this.push({ "col": col, "dir": "asc"});
+						$("#" + id).addClass("asc");
+					}
+					
 					return;
 				},				
 				filterRecords: function() 
@@ -195,6 +246,8 @@
 									if (x.dir == "asc") filtered.sort((a, b) => a[x.col] - b[x.col]);
 									if (x.dir == "desc") filtered.sort((a, b) => b[x.col] - a[x.col]);				
 								}
+
+
 							}
 						);
 					}
@@ -279,15 +332,15 @@
 			</div>	
 					
 			<div id="listHeader" class="listViewColumns">
-				<div>No</div>
-				<div>Title <button class="sortbutton" onclick="lv.toggleSort('title')"></button></div>
-				<div>Author <button class="sortbutton" onclick="lv.toggleSort('author')"></button></div>
-				<div>Category <button class="sortbutton" onclick="lv.toggleSort('category')"></button></div>
-				<div>Borrower <button class="sortbutton" onclick="lv.toggleSort('borrower')"></button></div>
-				<div>Borrowed <button class="sortbutton" onclick="lv.toggleSort('borrowdate')"></button></div>
-				<div>Return By <button class="sortbutton" onclick="lv.toggleSort('returnby')"></button></div>
-				<div>Returned <button class="sortbutton" onclick="lv.toggleSort('returndate')"></button></div>
-				<div>Fine <button class="sortbutton" onclick="lv.toggleSort('fine')"></button></div>
+				<div><button class="nobutton">No</button></div>
+				<div><button id="btnSortTitle" class="sortbutton asc" onclick="lv.toggleSort('title', this.id)">Title</button></div>
+				<div><button id="btnSortAuthor" class="sortbutton" onclick="lv.toggleSort('author', this.id)">Author</button></div>
+				<div><button id="btnSortCategory" class="sortbutton" onclick="lv.toggleSort('category', this.id)">Category</button></div>
+				<div><button id="btnSortBorrower" class="sortbutton" onclick="lv.toggleSort('borrower', this.id)">Borrower</button></div>
+				<div><button id="btnSortBorrowdate" class="sortbutton desc" onclick="lv.toggleSort('borrowdate', this.id)">Borrowed</button></div>
+				<div><button id="btnSortReturnBy" class="sortbutton" onclick="lv.toggleSort('returnby', this.id)">Return By</button></div>
+				<div><button id="btnSortReturndate" class="sortbutton" onclick="lv.toggleSort('returndate', this.id)">Returned</button></div>
+				<div><button id="btnSortFine" class="sortbutton" onclick="lv.toggleSort('fine', this.id)">Fine</button></div>
 			</div>
 
 			<div id="listRows">
