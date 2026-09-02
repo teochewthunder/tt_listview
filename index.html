@@ -91,6 +91,17 @@
 			{
 				content: "\25BC";
 			}
+
+			label
+			{
+				font-weight: bold;
+			}
+
+			#txtSearch, #ddlPeriod
+			{
+				width: 15em;
+				margin-right: 1em;
+			}
 		</style>
 
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -330,11 +341,20 @@
 	<body>
 		<div id="listContent">
 			<div id="listFilters">
-				<input type="text" placeholder="Search term, e.g, orange" value="" oninput="lv.setSearch(this.value);">
-				<select onchange="lv.getRecords(2025, this.value);">
-					<option value="3">March</option>
-					<option value="4">April</option>
-				</select>
+				<label>
+					Period: 
+					<select id="ddlPeriod" onchange="lv.getRecords(2025, this.value);">
+						<option value="3">March 2025</option>
+						<option value="4">April 2025</option>
+					</select>					
+				</label>
+
+				<label>
+					Search:
+					<input id="txtSearch" placeholder="Search term, e.g, orange" value="" oninput="lv.setSearch(this.value);" />
+				</label>
+
+				<hr />
 			</div>	
 					
 			<div id="listHeader" class="listViewColumns">
