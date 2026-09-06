@@ -29,7 +29,7 @@
 			.listViewColumns
 			{
 				display: grid;
-				grid-template-columns: 1fr 10fr 8fr 8fr 8fr 5fr 5fr 5fr 1fr;
+				grid-template-columns: 1fr 10fr 6fr 6fr 6fr 5fr 5fr 5fr 3fr;
 				gap: 5px;
 			}
 
@@ -77,9 +77,9 @@
 			{
 				width: 10px;
 				height: 10px;
-				margin-left: 10px;
+				margin-left: 5px;
 				display: inline-block;
-				content: "-";
+				content: "";
 			}
 
 			.asc:after
@@ -358,7 +358,7 @@
 			</div>	
 					
 			<div id="listHeader" class="listViewColumns">
-				<div><button class="nobutton">No</button></div>
+				<div><button class="nobutton">#</button></div>
 				<div><button id="btnSortTitle" class="sortbutton asc" onclick="lv.toggleSort('title', this.id)">Title</button></div>
 				<div><button id="btnSortAuthor" class="sortbutton" onclick="lv.toggleSort('author', this.id)">Author</button></div>
 				<div><button id="btnSortCategory" class="sortbutton" onclick="lv.toggleSort('category', this.id)">Category</button></div>
