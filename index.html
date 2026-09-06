@@ -97,12 +97,6 @@
 			{
 				font-weight: bold;
 			}
-
-			#txtSearch, #ddlPeriod
-			{
-				width: 15em;
-				margin-right: 1em;
-			}
 		</style>
 
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -350,6 +344,8 @@
 					</select>					
 				</label>
 
+				&nbsp;
+
 				<label>
 					Search:
 					<input id="txtSearch" placeholder="Search term, e.g, orange" value="" oninput="lv.setSearch(this.value);" />
@@ -375,6 +371,8 @@
 			</div>
 
 			<div id="listPaging">
+				<hr />
+
 				<div>
 					<button id="btnFirst" class="pageButton" onclick="lv.setPageNo(1)">&laquo;</button>
 					<button id="btnPrev" class="pageButton" onclick="lv.setPage('prev')">&lsaquo;</button>	
@@ -386,6 +384,8 @@
 					<button id="btnNext" class="pageButton" onclick="lv.setPage('next')">&rsaquo;</button>
 					<button id="btnLast" class="pageButton"onclick="lv.setPage('last')">&raquo;</button>
 				</div>
+
+				&nbsp;
 
 				<div>
 					Records per Page
