@@ -33,6 +33,11 @@
 				gap: 5px;
 			}
 
+			.shade
+			{
+				background-color: rgba(0, 0, 0, 0.1);
+			}
+
 			#listPaging
 			{
 				width: 100%;
@@ -270,6 +275,7 @@
 						{
 						    const row = $("<div></div>");
 						    row.addClass("listViewColumns");
+						    if (i % 2 == 0) row.addClass("shade");
 
 						    let col;
 						    col = $("<div></div>");
