@@ -5,6 +5,7 @@
 
 		<style>
 			div {outline: 0px solid red;}
+
 			#listContent
 			{
 				width: 1000px;
@@ -17,8 +18,6 @@
 			#listHeader
 			{
 				width: 100%
-				font-weight:  bold;
-				color: rgb(100, 100, 100);
 			}
 
 			#listRows
@@ -63,7 +62,7 @@
 				color: rgb(0, 0, 0);
 			}
 
-			.sortbutton, .nobutton
+			.sortButton, .noButton
 			{
 				width: auto;
 				padding: 0px;
@@ -79,7 +78,7 @@
 				color: rgb(255, 0, 0);
 			}
 
-			.sortbutton:after
+			.sortButton:after
 			{
 				width: 10px;
 				height: 10px;
@@ -259,13 +258,10 @@
 									if (x.dir == "asc") filtered.sort((a, b) => a[x.col] - b[x.col]);
 									if (x.dir == "desc") filtered.sort((a, b) => b[x.col] - a[x.col]);				
 								}
-
-
 							}
 						);
 					}
 
-					//getsubset
 					var startIndex = ((this.pageNo - 1) * this.pageSize);
 
 					filtered = filtered.slice(startIndex, startIndex + parseInt(this.pageSize));
@@ -342,7 +338,7 @@
 	<body>
 		<div id="listContent">
 			<div id="listFilters">
-				<label>
+ 				<label>
 					Period: 
 					<select id="ddlPeriod" onchange="lv.getRecords(2025, this.value);">
 						<option value="3">March 2025</option>
@@ -355,21 +351,21 @@
 				<label>
 					Search:
 					<input id="txtSearch" placeholder="Search term, e.g, orange" value="" oninput="lv.setSearch(this.value);" />
-				</label>
+				</label> 
 
 				<hr />
 			</div>	
 					
 			<div id="listHeader" class="listViewColumns">
-				<div><button class="nobutton">No</button></div>
-				<div><button id="btnSortTitle" class="sortbutton asc" onclick="lv.toggleSort('title', this.id)">Title</button></div>
-				<div><button id="btnSortAuthor" class="sortbutton" onclick="lv.toggleSort('author', this.id)">Author</button></div>
-				<div><button id="btnSortCategory" class="sortbutton" onclick="lv.toggleSort('category', this.id)">Category</button></div>
-				<div><button id="btnSortName" class="sortbutton" onclick="lv.toggleSort('name', this.id)">Name</button></div>
-				<div><button id="btnSortBorrowdate" class="sortbutton desc" onclick="lv.toggleSort('borrowdate', this.id)">Borrowed</button></div>
-				<div><button id="btnSortReturnBy" class="sortbutton" onclick="lv.toggleSort('returnby', this.id)">Return By</button></div>
-				<div><button id="btnSortReturndate" class="sortbutton" onclick="lv.toggleSort('returndate', this.id)">Returned</button></div>
-				<div><button id="btnSortFine" class="sortbutton" onclick="lv.toggleSort('fine', this.id)">Fine</button></div>
+				<div><button class="noButton">No</button></div>
+				<div><button id="btnSortTitle" class="sortButton asc" onclick="lv.toggleSort('title', this.id)">Title</button></div>
+				<div><button id="btnSortAuthor" class="sortButton" onclick="lv.toggleSort('author', this.id)">Author</button></div>
+				<div><button id="btnSortCategory" class="sortButton" onclick="lv.toggleSort('category', this.id)">Category</button></div>
+				<div><button id="btnSortName" class="sortButton" onclick="lv.toggleSort('name', this.id)">Name</button></div>
+				<div><button id="btnSortBorrowdate" class="sortButton desc" onclick="lv.toggleSort('borrowdate', this.id)">Borrowed</button></div>
+				<div><button id="btnSortReturnBy" class="sortButton" onclick="lv.toggleSort('returnby', this.id)">Return By</button></div>
+				<div><button id="btnSortReturndate" class="sortButton" onclick="lv.toggleSort('returndate', this.id)">Returned</button></div>
+				<div><button id="btnSortFine" class="sortButton" onclick="lv.toggleSort('fine', this.id)">Fine</button></div>
 			</div>
 
 			<div id="listRows">
@@ -379,7 +375,7 @@
 			<div id="listPaging">
 				<hr />
 
-				<div>
+ 				<div>
 					<button id="btnFirst" class="pageButton" onclick="lv.setPageNo(1)">&laquo;</button>
 					<button id="btnPrev" class="pageButton" onclick="lv.setPage('prev')">&lsaquo;</button>	
 				
@@ -391,8 +387,6 @@
 					<button id="btnLast" class="pageButton"onclick="lv.setPage('last')">&raquo;</button>
 				</div>
 
-				&nbsp;
-
 				<div>
 					Records per Page
 					<select onchange="lv.setPageSize(this.value)">
@@ -400,8 +394,10 @@
 						<option value="50" selected>50</option>
 						<option value="100">100</option>
 						<option value="500">500</option>
-					</select>				
-				</div>
+					</select>	
+
+					&nbsp;&nbsp;			
+				</div> 
 			</div>
 		</div>
 	</body>
