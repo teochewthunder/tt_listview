@@ -1,2 +1,10 @@
-# List View (TBA)
-A typical listview with an SQL backend, with viewing functions in JavaScript.
+# List View (TBC)
+API Endpoint:
+
+## Properties
+
+## Data Search
+
+## Data Paging
+
+## Data Sorting
