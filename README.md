@@ -1,6 +1,6 @@
 # List View (TBC)
-API Endpoint: https://oracleapex.com/ords/teochewthunder/borrowing/`year`/`month`
-Example: https://oracleapex.com/ords/teochewthunder/borrowing/2026/3
+- API Endpoint: https://oracleapex.com/ords/teochewthunder/borrowing/`year`/`month`
+- Example: https://oracleapex.com/ords/teochewthunder/borrowing/2026/3
 
 ## HTML/CSS
 Header and rows are styled using the same template grid format, for consistency.
@@ -10,6 +10,9 @@ Header and rows are styled using the same template grid format, for consistency.
 - `sort`: An array of objects. Each object will have these properties
   - `col`: the name of the sorted column.
   - `dir`: value "asc" or "desc".
+- `pageNo`: current page being viewed in the dataset.
+- `pageSize`: number of records in a page.
+- `search`: value to filter columns by.
 
 ## Data Change
 - User selects from Year/Month dropdown list
@@ -17,7 +20,7 @@ Header and rows are styled using the same template grid format, for consistency.
 
 ## Data Search
 - User enters term into search bar
-- `records` is filtered based on `title`, `author`, `category` or `name` matching the search term.
+- `records` is filtered based on `title`, `author`, `category` or `name` matching the search term in `search`.
 
 ## Data Paging
 
