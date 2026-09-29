@@ -1,4 +1,4 @@
-# List View (TBC)
+# List View
 - API Endpoint: ords/teochewthunder/borrowing/`year`/`month`
 - Example: https://oracleapex.com/ords/teochewthunder/borrowing/2026/3
 
